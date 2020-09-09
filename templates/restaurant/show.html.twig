@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Restaurant{% endblock %}
+
+{% block body %}
+    <a href="{{ path('restaurant_index') }}">< retour à la liste</a>
+
+
+    <div class="row">
+        <div class="col-3">
+            <h1>{{ restaurant.capitalizeName }}</h1>
+            <h2>
+                <span class="badge badge-primary">
+
+                    {% if restaurant.averageRating %}
+                        {{ restaurant.averageRating | number_format(2, ',') }}/5
+                    {% else %}
+                        Pas encore d'avis
+                    {% endif%}
+                </span>
+            </h2>
+
+            <p>
+                {{ restaurant.description }}
+            </p>
+        </div>
+        <div class="col-9">
+            {% for review in restaurant.reviews %}
+                <div class="review mb-2">
+                    <h4>{{ review.name }}</h4>
+                    <span class="rating">{{ review.rating }}/5</span>
+                    <p>{{ review.description }}</p>
+                </div>
+            {% endfor %}
+            <hr>
+
+            <h3>Ajoutez un avis</h3>
+
+            {{ form_start(reviewForm) }}
+                {{ form_widget(reviewForm) }}
+                <button class="btn btn-primary">Ajouter un avis</button>
+            {{ form_end(reviewForm) }}
+
+        </div>
+    </div>
+
+
+
+
+{% endblock %}

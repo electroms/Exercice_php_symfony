@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Restaurant index{% endblock %}
+
+{% block body %}
+
+    <h1>Tous nos restaurants</h1>
+    <hr>
+    <div class="jumbotron">
+        <h2>Le restaurant mis à l'avant cette semaine :</h2>
+        <div class="card">
+            <div class="card-body">
+                <h3>Test</h3>
+                <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ad architecto assumenda blanditiis commodi eum fuga id illo ipsa minima, natus neque nostrum odit possimus quis repudiandae sed ullam unde?</p>
+            </div>
+            <div class="card-footer">
+                <a href="#" class="btn btn-sm btn-primary float-right">Voir</a>
+            </div>
+        </div>
+    </div>
+
+    <h2>Liste des restaurants inscrits</h2>
+
+    <table class="table">
+        <tbody>
+        {% for restaurant in restaurants %}
+            <tr>
+                <td>
+                    <span class="badge badge-success">{{ restaurant.city.name }}</span>
+                    <strong>
+                        <a href="{{ path('restaurant_show', {'id': restaurant.id}) }}">
+                            {{ restaurant.name }}
+                        </a>
+                    </strong>
+                    <br>
+                    <small>{{ restaurant.description }}</small>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
